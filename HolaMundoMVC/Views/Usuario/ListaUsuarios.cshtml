@@ -1,0 +1,41 @@
+@{
+    List<Usuario> usuarios = ViewBag.usuarios;
+}
+<table class="table">
+    <thead>
+        <th> Nombre</th>
+        <th> Apellido </th>
+        <th> Edad </th>
+    </thead>
+    <tbody>
+
+        @foreach (Usuario usuario in ViewBag.usuarios)
+        {
+            <tr>
+                <td> @usuario.nombre</td>
+                <td> @usuario.apellido</td>
+                <td> @usuario.edad</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <th> Nombre </th>
+        <th> Apellido </th>
+        <th> Edad </th>
+    </thead>
+    <tbody>
+
+        @for (int i = 0; i < usuarios.Count; i++)
+        {
+            <tr>
+                <td>@usuarios[i].nombre</td>
+                <td>@usuarios[i].apellido</td>
+                <td>@usuarios[i].edad</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

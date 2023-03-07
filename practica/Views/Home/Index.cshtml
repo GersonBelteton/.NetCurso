@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Empleado
+<div class="container">
+
+    <ul>
+
+        @foreach (Trabajador trabajador in ViewBag.Empleados)
+        {
+            <li>@trabajador.id - @trabajador.nombre</li>
+
+
+        }
+
+    </ul>
+
+    <form asp-action="setUsuario" asp-controller="Home" method="post">
+        <div class="form-group col-md-6">
+            <label>Nombre</label>
+            <input type="text" asp-for="nombre" class="form-control">
+            <span asp-validation-for="nombre"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Apellido</label>
+            <input type="text" asp-for="apellido" class="form-control">
+            <span asp-validation-for="apellido"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label>CUI</label>
+            <input type="text" asp-for="cui" class="form-control">
+            <span asp-validation-for="cui"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label>correo</label>
+            <input type="text" asp-for="correo" class="form-control">
+            <span asp-validation-for="correo"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Estado</label>
+            <input class="form-check-input" type="checkbox" asp-for="activo">
+        </div>
+        <div class="form-group col-md-6">
+            <label>fecha nacimiento</label>
+            <input type="date" asp-for="fechaNacimiento" class="form-control">
+            <span asp-validation-for="fechaNacimiento"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label>edad</label>
+            <input type="text" asp-for="edad" class="form-control">
+            <span asp-validation-for="edad"></span>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-primary">GUARDAR</button>
+        </div>
+    </form>
+
+</div>

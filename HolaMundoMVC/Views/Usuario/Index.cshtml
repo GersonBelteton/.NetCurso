@@ -1,0 +1,28 @@
+@{
+
+    List<String> frutas = new List<string>() { "manzana", "sandia", "banano" };
+
+    ViewData["frutas"] = frutas;
+}
+
+<h1> Usuarios </h1>
+
+@ViewBag.nombre
+
+@ViewData["apellido"]
+
+<ul>
+    @foreach (String nom in ViewBag.nombres)
+    {
+        <li> @nom </li>
+    }
+</ul>
+
+<ul>
+
+    @foreach (String fruta in frutas)
+    {
+        <li>@fruta</li>
+    }
+
+</ul>

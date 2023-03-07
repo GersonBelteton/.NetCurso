@@ -1,0 +1,91 @@
+.NET CORE 7 ENTITY FRAMEWORK SQL SERVER
+
+https://jasonwatmore.com/post/2022/03/18/net-6-connect-to-sql-server-with-entity-framework-core
+
+
+Instalar------------------------------------------------------------------------------------------------------------------
+
+dotnet add package Microsoft.EntityFrameworkCore
+
+dotnet add package Microsoft.EntityFrameworkCore.tools
+
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+
+
+Agregar en appsettings.json-----------------------------------------------------------------------------------------------
+
+  "ConnectionStrings": {
+	// cadena de conexion
+    "WebApiDatabase": "Data Source=localhost; Initial Catalog=dbEmpleado; User Id=sa; Password=1234;TrustServerCertificate=True;"
+  },
+
+
+Agregar en program.cs------------------------------------------------------------------------------------------------------
+
+builder.Services.AddDbContext<EmpleadoCTX>(options => {
+    var config = builder.Configuration;
+    var connectionString = config.GetConnectionString("WebApiDatabase");
+    
+    options.UseSqlServer(connectionString);
+});
+
+Crear contexto en la carpeta Models-----------------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace practica.Models
+{
+    using Microsoft.EntityFrameworkCore;
+    public class EmpleadoCTX : DbContext
+    {
+        
+
+        public EmpleadoCTX(DbContextOptions<EmpleadoCTX> options) : base(options){
+
+        }
+
+        public DbSet<Trabajador> Trabajador {get; set;}
+    }
+}
+
+Crear modelo en la carpeta Models-----------------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace practica.Models
+{
+    [Table("Trabajador")]
+    public class Trabajador
+    {
+        [Key]
+        public int id { get; set; }
+        [Column("nombre")]
+        public string? nombre { get; set; }
+        [Column("apellido")]
+        public string? apellido { get; set; }
+        [Column("edad")]
+        public int edad { get; set; }
+    }
+}
+
+
+Migracion------------------------------------------------------------------------------------
+
+// crear base de datos a partir de los modelos creados en el proyecto 
+
+// en consola de administracón de paquetes escribir los siguientes comandos
+
+add-migration "name"
+
+Update-Database -Verbose
+
+Script-migration //para ver el script de sql que se ejecutará
